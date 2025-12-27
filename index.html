@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Made by Sleeping AI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&family=Heebo:wght@100..400&display=swap');
+
+        :root {
+            --cream: #F8F0E3;
+            --black: #000000;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--cream);
+            font-family: 'Google Sans', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Creamy Scrollbar */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--cream); }
+
+        /* Film Grain & Flicker Overlay */
+        .film-grain {
+            position: fixed;
+            inset: 0;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 200;
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.08; }
+            50% { opacity: 0.12; }
+            100% { opacity: 0.09; }
+        }
+
+        /* Cinematic Story Intro */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .chapter-num {
+            font-size: 0.7rem;
+            letter-spacing: 1.5em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0;
+            color: var(--cream);
+        }
+
+        .designer-credit {
+            font-size: 10px;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            opacity: 0;
+            color: rgba(248, 240, 227, 0.4);
+            margin-top: 20px;
+        }
+
+        /* Main Sections */
+        .reveal-section {
+            height: 250vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-wrapper {
+            width: 80vw;
+            height: 85vh;
+            position: sticky;
+            top: 7.5vh;
+            overflow: hidden;
+            filter: blur(150px) brightness(0); /* The Cinematic Fog */
+            transform: scale(1.15);
+        }
+
+        .bg-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) contrast(1.1);
+        }
+
+        .content-box {
+            position: absolute;
+            bottom: 12%;
+            text-align: center;
+            z-index: 150;
+            opacity: 0;
+        }
+
+        .typewriter {
+            font-family: 'Heebo', sans-serif;
+            letter-spacing: 0.5em;
+            font-weight: 200;
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-top: 15px;
+        }
+
+        footer {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="film-grain"></div>
+
+    <div id="intro-overlay">
+        <div class="chapter-num" id="chapter-text">Chapter 1.</div>
+        <h1 class="text-2xl font-light tracking-[1em] uppercase opacity-0" id="main-brand">Made by Sleeping AI</h1>
+        <div class="designer-credit" id="ammar-credit">designed by Ammar</div>
+    </div>
+
+    <main>
+        <section class="reveal-section">
+            <div class="image-wrapper">
+                <div class="bg-img" style="background-image: url('1.jpg');"></div>
+            </div>
+            <div class="content-box">
+                <h2 class="text-6xl font-bold tracking-widest">NELLY</h2>
+                <div class="typewriter" data-en="Yummiest ever" data-he="הכי טעים אי פעם" data-la="Nova Visio"></div>
+            </div>
+        </section>
+
+        <section class="reveal-section">
+            <div class="image-wrapper">
+                <div class="bg-img" style="background-image: url('2.jpg');"></div>
+            </div>
+            <div class="content-box">
+                <h2 class="text-6xl font-bold tracking-widest italic">DELICIOUS</h2>
+                <div class="typewriter" data-en="Hey, wasn't bad us meeting" data-he="היי, לא היה רע שנפגשנו" data-la="Anima Aesthetica"></div>
+            </div>
+        </section>
+
+        <section class="reveal-section">
+            <div class="image-wrapper">
+                <div class="bg-img" style="background-image: url('3.jpg');"></div>
+            </div>
+            <div class="content-box">
+                <h2 class="text-7xl font-bold tracking-tighter uppercase">ИДЕАЛЬНО</h2>
+                <div class="typewriter" data-en="Final Reflection" data-he="השתקפות סופית" data-la="Reflexio Ultima"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="text-center">
+            <h2 class="text-xl font-light tracking-[1em] uppercase">Designed by Ammar</h2>
+            <p class="mt-4 text-[9px] opacity-20 tracking-[0.5em] uppercase">Made by Sleeping AI</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Cinematic Story Intro Sequence
+        const tl = gsap.timeline();
+        tl.to("#chapter-text", { duration: 1.5, opacity: 1, y: -10, ease: "power2.out" })
+          .to("#main-brand", { duration: 1.5, opacity: 1, ease: "power2.inOut" }, "-=0.5")
+          .to("#ammar-credit", { duration: 1.2, opacity: 1, ease: "power1.out" }, "-=0.5")
+          .to("#intro-overlay", { 
+              duration: 2, 
+              delay: 1, 
+              backgroundColor: "rgba(0,0,0,0)", 
+              filter: "blur(20px)",
+              opacity: 0, 
+              display: "none", 
+              ease: "power4.inOut" 
+          });
+
+        // 2. Slow Fog Reveal (Scrub 4 for heavy cinematic feel)
+        gsap.utils.toArray(".reveal-section").forEach((section) => {
+            const wrapper = section.querySelector(".image-wrapper");
+            const box = section.querySelector(".content-box");
+
+            gsap.to(wrapper, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top bottom",
+                    end: "center center",
+                    scrub: 4,
+                },
+                filter: "blur(0px) brightness(1)",
+                scale: 1,
+            });
+
+            gsap.to(box, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "center center",
+                    end: "bottom center",
+                    scrub: 2,
+                },
+                opacity: 1,
+                y: -40
+            });
+        });
+
+        // 3. Multilingual Typewriter
+        function runTypewriter(el) {
+            const texts = [el.dataset.en, el.dataset.he, el.dataset.la];
+            let i = 0, j = 0, isDeleting = false;
+
+            function type() {
+                let current = texts[i];
+                el.textContent = isDeleting ? current.substring(0, j--) : current.substring(0, j++);
+
+                if (!isDeleting && j > current.length) {
+                    setTimeout(() => isDeleting = true, 3500);
+                } else if (isDeleting && j === 0) {
+                    isDeleting = false;
+                    i = (i + 1) % texts.length;
+                }
+                setTimeout(type, isDeleting ? 40 : 150);
+            }
+            type();
+        }
+
+        document.querySelectorAll('.typewriter').forEach(runTypewriter);
+    </script>
+</body>
+</html>
